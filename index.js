@@ -47,17 +47,3 @@ function main(htmlOfWebsite) {
     });
   }
 }
-
-// for (i = 0; i < 5; i++)
-
-<img
-  class="meme-img"
-  src="/afraid/i_don't_know_what_this_meme_is_for/and_at_this_point_i'm_too_afraid_to_ask.jpg?preview=true&amp;watermark=none"
-></img>;
-
-('https://memegen.link/older/it&#39;s_an_older_meme_sir/but_it_checks_out.jpg?preview=true&amp;watermark=none');
-
-<img
-  class="meme-img"
-  src="https://memegen.link/afraid/i_don't_know_what_this_meme_is_for/and_at_this_point_i'm_too_afraid_to_ask.jpg?preview=true&amp;watermark=none"
-></img>;
