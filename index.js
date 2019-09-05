@@ -9,6 +9,16 @@ let htmlWithHttps;
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 
+var fs = require('fs');
+var dir = './top_memes';
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir);
+}
+
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir);
+}
+
 var options = {
   host: 'memegen.link',
   path: '/examples'
@@ -49,7 +59,7 @@ function main(htmlOfWebsite) {
   for (i = 0; i < 10; i++) {
     const fs = require('fs');
 
-    const file = fs.createWriteStream(`file${i}.jpg`);
+    const file = fs.createWriteStream(`top_memes/file${i}.jpg`);
 
     const requestTwo = https.get(htmlWithHttps[i], function(response) {
       response.pipe(file);
