@@ -26,7 +26,12 @@ request.on('error', function(e) {
 request.end();
 
 function main(htmlOfWebsite) {
-  htmlMatch = htmlOfWebsite.match(/"\/.+watermark=none" style/g);
+  htmlMatch = htmlOfWebsite.match(/"\/[^\n#]+watermark=none" style/g);
+
+  // let htmlFiltered = htmlMatch.filter(function htmtFiltering(filter) {
+  //   return !filter.includes('&#');
+  // });
+
   htmlSlicedToTen = htmlMatch.slice(0, 10);
   htmlCorrectLink = htmlSlicedToTen.map(function htmlCut(url) {
     return url.slice(1, -7);
