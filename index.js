@@ -6,6 +6,8 @@ let htmlMatch;
 let htmlSlicedToTen;
 let htmlCorrectLink;
 let htmlWithHttps;
+const Entities = require('html-entities').AllHtmlEntities;
+const entities = new Entities();
 
 var options = {
   host: 'memegen.link',
@@ -26,13 +28,15 @@ request.on('error', function(e) {
 request.end();
 
 function main(htmlOfWebsite) {
-  htmlMatch = htmlOfWebsite.match(/"\/[^\n#]+watermark=none" style/g);
+  htmlMatch = htmlOfWebsite.match(/"\/.+watermark=none" style/g);
+
+  let htmlDecoded = htmlMatch.map(urlDecoded => entities.decode(urlDecoded));
 
   // let htmlFiltered = htmlMatch.filter(function htmtFiltering(filter) {
-  //   return !filter.includes('&#');
+  // return !filter.includes('&#');
   // });
 
-  htmlSlicedToTen = htmlMatch.slice(0, 10);
+  htmlSlicedToTen = htmlDecoded.slice(0, 10);
   htmlCorrectLink = htmlSlicedToTen.map(function htmlCut(url) {
     return url.slice(1, -7);
   });
