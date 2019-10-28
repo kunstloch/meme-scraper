@@ -1,29 +1,26 @@
 // grab data from https://memegen.link/examples ->  data = 'string'
 
-var https = require('https');
+const https = require('https');
+const fs = require('fs');
+const Entities = require('html-entities').AllHtmlEntities;
+const entities = new Entities();
+
 let htmlOfWebsite;
 let htmlMatch;
 let htmlSlicedToTen;
 let htmlCorrectLink;
 let htmlWithHttps;
-const Entities = require('html-entities').AllHtmlEntities;
-const entities = new Entities();
 
-var fs = require('fs');
-var dir = './top_memes';
+let dir = './memes';
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir);
 }
 
-if (!fs.existsSync(dir)) {
-  fs.mkdirSync(dir);
-}
-
-var options = {
+let options = {
   host: 'memegen.link',
   path: '/examples'
 };
-var request = https.request(options, function(res) {
+let request = https.request(options, function(res) {
   htmlOfWebsite = '';
   res.on('data', function(chunk) {
     htmlOfWebsite += chunk;
@@ -57,9 +54,7 @@ function main(htmlOfWebsite) {
   console.log(htmlWithHttps);
 
   for (i = 0; i < 10; i++) {
-    const fs = require('fs');
-
-    const file = fs.createWriteStream(`top_memes/file${i}.jpg`);
+    const file = fs.createWriteStream(`memes/file${i}.jpg`);
 
     const requestTwo = https.get(htmlWithHttps[i], function(response) {
       response.pipe(file);
