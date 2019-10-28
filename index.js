@@ -5,13 +5,7 @@ const fs = require('fs');
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 
-let htmlOfWebsite;
-let htmlMatch;
-let htmlSlicedToTen;
-let htmlCorrectLink;
-let htmlWithHttps;
-
-let dir = './memes';
+const dir = './memes';
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir);
 }
@@ -20,8 +14,8 @@ let options = {
   host: 'memegen.link',
   path: '/examples'
 };
-let request = https.request(options, function(res) {
-  htmlOfWebsite = '';
+const request = https.request(options, function(res) {
+  let htmlOfWebsite = '';
   res.on('data', function(chunk) {
     htmlOfWebsite += chunk;
   });
@@ -35,19 +29,19 @@ request.on('error', function(e) {
 request.end();
 
 function main(htmlOfWebsite) {
-  htmlMatch = htmlOfWebsite.match(/"\/.+watermark=none" style/g);
+  const htmlMatch = htmlOfWebsite.match(/"\/.+watermark=none" style/g);
 
-  let htmlDecoded = htmlMatch.map(urlDecoded => entities.decode(urlDecoded));
+  const htmlDecoded = htmlMatch.map(urlDecoded => entities.decode(urlDecoded));
 
   // let htmlFiltered = htmlMatch.filter(function htmtFiltering(filter) {
   // return !filter.includes('&#');
   // });
 
-  htmlSlicedToTen = htmlDecoded.slice(0, 10);
-  htmlCorrectLink = htmlSlicedToTen.map(function htmlCut(url) {
+  const htmlSlicedToTen = htmlDecoded.slice(0, 10);
+  const htmlCorrectLink = htmlSlicedToTen.map(function htmlCut(url) {
     return url.slice(1, -7);
   });
-  htmlWithHttps = htmlCorrectLink.map(
+  const htmlWithHttps = htmlCorrectLink.map(
     https => (https = `https://memegen.link${https}`)
   );
 
