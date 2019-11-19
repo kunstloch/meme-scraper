@@ -15,7 +15,7 @@ let options = {
   path: '/examples'
 };
 const request = https.request(options, function(res) {
-  let htmlOfWebsite = '';
+  let htmlOfWebsite = ``;
   res.on('data', function(chunk) {
     htmlOfWebsite += chunk;
   });
@@ -38,16 +38,18 @@ function main(htmlOfWebsite) {
   // });
 
   const htmlSlicedToTen = htmlDecoded.slice(0, 10);
+  console.log('htmlSlicedToTen:', htmlSlicedToTen);
   const htmlCorrectLink = htmlSlicedToTen.map(function htmlCut(url) {
-    return url.slice(1, -7);
+    return url.slice(1, -35);
   });
+  console.log('htmlCorrectLink:', htmlCorrectLink);
   const htmlWithHttps = htmlCorrectLink.map(
     https => (https = `https://memegen.link${https}`)
   );
 
   console.log(htmlWithHttps);
 
-  for (i = 0; i < 10; i++) {
+  for (let i = 0; i < 10; i++) {
     const file = fs.createWriteStream(`memes/file${i}.jpg`);
 
     const requestTwo = https.get(htmlWithHttps[i], function(response) {
