@@ -38,16 +38,14 @@ function main(htmlOfWebsite) {
   // });
 
   const htmlSlicedToTen = htmlDecoded.slice(0, 10);
-  console.log('htmlSlicedToTen:', htmlSlicedToTen);
+
   const htmlCorrectLink = htmlSlicedToTen.map(function htmlCut(url) {
     return url.slice(1, -35);
   });
-  console.log('htmlCorrectLink:', htmlCorrectLink);
+
   const htmlWithHttps = htmlCorrectLink.map(
     https => (https = `https://memegen.link${https}`)
   );
-
-  console.log(htmlWithHttps);
 
   for (let i = 0; i < 10; i++) {
     const file = fs.createWriteStream(`memes/file${i}.jpg`);
@@ -56,4 +54,5 @@ function main(htmlOfWebsite) {
       response.pipe(file);
     });
   }
+  console.log('Memes were saved!');
 }
